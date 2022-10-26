@@ -7,7 +7,6 @@ const adminRouter = require("./routes/admin");
 const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
 // khởi tạo
-const PORT = 3000;
 const app = express();
 const DB =
   "mongodb+srv://nguy3ntanduc:nguy3ntanduc@cluster0.kwpcnfb.mongodb.net/?retryWrites=true&w=majority";
@@ -30,6 +29,7 @@ mongoose
     console.log("kết nối DB thất bại :" + e);
   });
 
-app.listen(PORT, "0.0.0.0", () => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
   console.log("kết nối thành công :" + PORT);
 });
