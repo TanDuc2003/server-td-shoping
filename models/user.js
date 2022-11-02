@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
+const { productSchema } = require("./product");
 
 const userSchema = mongoose.Schema({
   name: {
-    // kiểu String, bắt buộc nhập, không được để trống
-    require: true,
+    required: true,
     type: String,
     trim: true,
   },
   email: {
-    require: true,
+    required: true,
     type: String,
     trim: true,
     validate: {
@@ -17,24 +17,30 @@ const userSchema = mongoose.Schema({
           /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         return value.match(re);
       },
-      message: "Vui lòng nhập đúng định dạng Email",
+      message: "Vui lòng nhập đúng định dạng Emailaaa",
     },
   },
   password: {
-    require: true,
+    required: true,
     type: String,
   },
-  // có hai trường hợp người dùng chưa muốn cập nhật và đã cập nhập
   address: {
     type: String,
-    default: " ",
+    default: "",
   },
-  //chọn đăng nhập dưới tư cách admin hay user
   type: {
     type: String,
     default: "user",
   },
-  // giỏ hàngj
+  cart: [
+    {
+      product: productSchema,
+      quantity: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
 });
 
 const User = mongoose.model("User", userSchema);
