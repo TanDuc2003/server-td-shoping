@@ -17,7 +17,7 @@ const userSchema = mongoose.Schema({
           /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         return value.match(re);
       },
-      message: "Vui lòng nhập đúng định dạng Emailaaa",
+      message: "Vui lòng nhập đúng định dạng Email",
     },
   },
   password: {
