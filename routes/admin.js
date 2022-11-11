@@ -16,6 +16,7 @@ adminRouter.post("/admin/add-product", admin, async (req, res) => {
       price,
       category,
     });
+    console.log(product);
     product = await product.save();
     res.json(product);
   } catch (e) {
@@ -39,6 +40,17 @@ adminRouter.post("/admin/delete-product", admin, async (req, res) => {
     const { id } = req.body;
     let product = await Product.findByIdAndDelete(id);
     res.json(product);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+//xóa sản phẩm order
+adminRouter.post("/admin/delete-product-order", admin, async (req, res) => {
+  try {
+    const { id } = req.body;
+    let order = await Order.findByIdAndDelete(id);
+    res.json(order);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
@@ -77,25 +89,29 @@ adminRouter.get("/admin/analytics", admin, async (req, res) => {
           orders[i].products[j].quantity * orders[i].products[j].product.price;
       }
     }
-
-    //danh mục sản phẩm
     let dienthoaiEarnings = await fetchCategoryWiseProduct("Điện Thoại");
-    let thietyeuEarnings = await fetchCategoryWiseProduct("Thiết Yếu");
-    let giadungEarnings = await fetchCategoryWiseProduct("Gia Dụng");
-    let sachEarnings = await fetchCategoryWiseProduct("Sách");
-    let thoitrangEarnings = await fetchCategoryWiseProduct("Thời Trang");
-    let petEarnings = await fetchCategoryWiseProduct("Pet");
-    let dientuEarnings = await fetchCategoryWiseProduct("Điện Tử");
+    let laptopEarnings = await fetchCategoryWiseProduct("Laptop");
+    let tabletEarnings = await fetchCategoryWiseProduct("Tablet");
+    let loaEarnings = await fetchCategoryWiseProduct("Loa");
+    let smartwatchEarnings = await fetchCategoryWiseProduct("Smartwatch");
+    let taingheEarnings = await fetchCategoryWiseProduct("Tai Nghe");
+    let chuotEarnings = await fetchCategoryWiseProduct("Chuột");
+    let banphimEarnings = await fetchCategoryWiseProduct("Bàn Phím");
+    let sacEarnings = await fetchCategoryWiseProduct("Cáp Sạc");
+    let oplungEarnings = await fetchCategoryWiseProduct("Ốp Lưng");
 
     let earnings = {
       totalEarnings,
       dienthoaiEarnings,
-      thietyeuEarnings,
-      giadungEarnings,
-      sachEarnings,
-      thoitrangEarnings,
-      petEarnings,
-      dientuEarnings,
+      laptopEarnings,
+      tabletEarnings,
+      loaEarnings,
+      smartwatchEarnings,
+      taingheEarnings,
+      chuotEarnings,
+      banphimEarnings,
+      sacEarnings,
+      oplungEarnings,
     };
     res.json(earnings);
   } catch (e) {

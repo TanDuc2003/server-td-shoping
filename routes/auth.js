@@ -9,7 +9,7 @@ const authRouter = express.Router();
 authRouter.post("/api/signup", async (req, res) => {
   try {
     const { name, email, password } = req.body;
-
+    console.log(name);
     const existtingUser = await User.findOne({ email }); //kiểm tra email đã tồn tại hay chưas
     if (existtingUser) {
       return res.status(400).json({ msg: "Đã có người sử dụng email này !" });

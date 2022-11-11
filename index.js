@@ -13,6 +13,19 @@ const DB =
   "mongodb+srv://nguy3ntanduc:nguy3ntanduc@cluster0.kwpcnfb.mongodb.net/?retryWrites=true&w=majority";
 
 //middleware
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:61562");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  next();
+});
 app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);
