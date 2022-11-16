@@ -12,6 +12,15 @@ productRouter.get("/api/products/", auth, async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+//lấy tất cả sản phẩm
+productRouter.get("/api/products/get-products", auth, async (req, res) => {
+  try {
+    const products = await Product.find({});
+    res.json(products);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 
 //seach theo tên sản phẩm
 
